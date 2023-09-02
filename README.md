@@ -1,7 +1,5 @@
 # Git Tutorial
 
-> Work in progress. New content is about to be added.
-
 Git is a distributed version control system, in which complete codebase with its full history is stored. This tutorial aims to provide you with fundamental knowledge and provide solutions to common problems.
 
 ## Configuration
@@ -249,11 +247,76 @@ The command above removed it locally. To remove it in Github, use the web interf
 git push origin --delete feature1
 ```
 
-When you remove a branch with web interface or someone else removes it with the command above, your local git repository will still think that this branch exists in the remote repository. To update this information use:
+When you remove a branch with web interface or someone else removes it with the command above, your local git repository will still think that this branch exists in the remote repository. To update this information use *git fetch* with *-p* option to prune (delete) branches deleted remotely:
 
 ```sh
 git fetch -p
 ```
+
+This deletes gone branches that look like this **origin/feature1**, which means that **feature1** will still be present. Delete it locally with *git branch -d feature1*.
+
+## Tagging
+
+Sometimes you will want to mark specific points in a repository’s history. Tags are a perfect way to do this.
+
+Let's create a new tag named first_tag:
+
+```sh
+git tag first_tag
+```
+
+Now you can check both *git log* and *git tag* to see that the tag has been added. You can switch to your tag with:
+
+```sh
+git checkout first_tag
+```
+
+After switching we get the following output.
+
+    Note: switching to 'first_tag'.
+
+    You are in 'detached HEAD' state. You can look around, make experimental
+    changes and commit them, and you can discard any commits you make in this
+    state without impacting any branches by switching back to a branch.
+
+    If you want to create a new branch to retain commits you create, you may
+    do so (now or later) by using -c with the switch command. Example:
+
+    git switch -c <new-branch-name>
+
+    Or undo this operation with:
+
+    git switch -
+
+    Turn off this advice by setting config variable advice.detachedHead to false
+
+    HEAD is now at 59ab498 added feature_file
+
+It tells us that we can create a branch starting with our current commit using *git switch -c new-branch-name* or we can go back to the latest commit with:
+
+```sh
+git switch -
+```
+
+If we want our tag to appear in remote repository as well, we have to push it there:
+
+```sh
+git push --tags
+```
+
+We can delete the tag locally:
+
+```sh
+git tag -d first_tag
+```
+
+or remotely with Github web interface, in which case we have to sync your local repository with:
+
+```sh
+git fetch -p -P
+```
+
+That command will delete both remote branches and tags that are gone in the remote repository.
 
 ## Common problems
 
