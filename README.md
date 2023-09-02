@@ -237,7 +237,23 @@ git checkout main
 git merge feature1
 ```
 
-Now changes from feature1 got merged into main. The commit with feature_file got copied to main branch.
+Now changes from feature1 got merged into main. The commit with feature_file got copied to main branch. We don't need feature1 branch anymore, so let's remove it.
+
+```sh
+git branch -d feature1
+```
+
+The command above removed it locally. To remove it in Github, use the web interface or the command below.
+
+```sh
+git push origin --delete feature1
+```
+
+When you remove a branch with web interface or someone else removes it with the command above, your local git repository will still think that this branch exists in the remote repository. To update this information use:
+
+```sh
+git fetch -p
+```
 
 ## Common problems
 
