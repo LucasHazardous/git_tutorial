@@ -239,6 +239,40 @@ git merge feature1
 
 Now changes from feature1 got merged into main. The commit with feature_file got copied to main branch.
 
-# End
+## Common problems
+
+* **Go to a particular commit**
+
+```sh
+git checkout COMMIT_HASH
+```
+
+* **Edit previous commit title**
+
+```sh
+git commit --amend
+```
+
+* **Remove previous commit, keep changes present and staged**
+
+```sh
+git reset --soft HEAD^1
+```
+
+* **Remove previous commit with changes**
+
+```sh
+git reset --hard HEAD^1
+```
+
+* **You made some uncommited changes, there is a commit on the same branch that you need to download**
+
+```sh
+git stash
+git pull
+git stash pop
+```
+
+## End
 
 This is the end of this tutorial. It covers a lot of Git functionality, so feel free to go over it again as many times as you want, testing different commands. Practice is the best teacher, the best way to learn Git is to use it and test different stuff. Good luck!
